@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MemBoard">
+
+
+	<insert id="memberJoin" parameterType="member"> 
+		INSERT INTO MBPROJECT_MEM
+		(MID, MPASSWORD, MNAME, MDATE, MEMAIL, MADRESS, MPHONE, MPHOTO)
+		VALUES(#{mid}, #{mpassword},#{mname}, #{mdate},
+		#{memail},#{madress},#{mphone}, #{mphotoname})
+	</insert>
+
+	<insert id="kakaoMemberJoin" parameterType="member">
+		INSERT INTO MBPROJECT_MEM
+		(MID,MPASSWORD,MNAME,MDATE,MEMAIL,MADRESS,MPHONE,MPHOTO,KAKAOID)
+		VALUES (#{mid},#{mpassword},#{mname},#{mdate},
+		#{memail},#{madress},#{mphone},#{mphotoname},#{kakaoId})
+	</insert>
+	
+	<insert id="naverMemberJoin" parameterType="member">
+		INSERT INTO
+		MBPROJECT_MEM
+		(MID,MPASSWORD,MNAME,MDATE,MEMAIL,MADRESS,MPHONE,MPHOTO,NAVERID)
+		VALUES(#{mid},#{mpassword},#{mname},#{mdate},
+		#{memail},#{madress},#{mphone},#{mphotoname},#{naverId})
+	</insert>
+
+	<select id="idOverlap" parameterType="String"
+		resultType="String">
+		SELECT MID FROM MBPROJECT_MEM WHERE MID=#{mid}
+	</select>
+
+	<select id="memberLogin" parameterType="member"
+		resultType="String">
+		SELECT MID FROM MBPROJECT_MEM WHERE MID=#{mid} AND
+		MPASSWORD=#{mpassword}
+	</select>
+
+	<select id="memberView" parameterType="String"
+		resultType="member">
+		SELECT * FROM MBPROJECT_MEM WHERE MID=#{mid}
+	</select>
+
+	<update id="memberUpdate" parameterType="member">
+		UPDATE MBPROJECT_MEM SET
+		MEMAIL=#{memail},
+		MADRESS=#{madress}, MPHONE=#{mphone} WHERE MID=#{mid}
+	</update>
+
+	<select id="memberList" resultType="member">
+		SELECT * FROM MBPROJECT_MEM
+	</select>
+
+	<delete id="memberDelete" parameterType="String">
+		DELETE FROM
+		MBPROJECT_MEM WHERE MID=#{mid}
+	</delete>
+
+	<select id="kakaoLogin" parameterType="String"
+		resultType="String">
+		SELECT MID FROM MBPROJECT_MEM WHERE KAKAOID=#{kakaoId}
+	</select>
+
+	<select id="naverLogin" parameterType="String"
+		resultType="String">
+		SELECT MID FROM MBPROJECT_MEM WHERE NAVERID=#{naverId}
+	</select>
+
+	<insert id="boardWrite" parameterType="board">
+		INSERT INTO
+		MBPROJECT_BOARD (BNUMBER, BID, BPASSWORD,
+		BTITLE, BCONTENTS,
+		BDATE,
+		BHITS, BFILENAME)
+		VALUES(SEQ_MBPRO.NEXTVAL,
+		#{bid},
+		#{bpassword},
+		#{btitle},
+		#{bcontents},SYSDATE, 0, #{bfilename})
+	</insert>
+	
+	<select id="boardListCount" resultType="int">
+		SELECT COUNT(BNUMBER)
+		FROM MBPROJECT_BOARD
+	</select>
+
+	<select id="boardList" parameterType="page" resultType="board">
+		SELECT *
+		FROM (SELECT B.*, ROW_NUMBER() OVER(ORDER BY
+		BHITS DESC)
+		AS RN FROM
+		MBPROJECT_BOARD B) WHERE RN BETWEEN #{startRow} AND
+		#{endRow}
+	</select>
+
+	<update id="boardHits" parameterType="int">
+		UPDATE MBPROJECT_BOARD SET
+		BHITS = BHITS+1 WHERE BNUMBER = #{bnumber}
+	</update>
+
+	<select id="boardView" parameterType="int" resultType="board">
+		SELECT *
+		FROM MBPROJECT_BOARD WHERE BNUMBER = #{bnumber}
+	</select>
+
+	<update id="boardUpdate" parameterType="board">
+		UPDATE MBPROJECT_BOARD
+		SET BTITLE=#{btitle}, BCONTENTS=#{bcontents}
+		WHERE BNUMBER=#{bnumber}
+	</update>
+
+	<delete id="boardDelete">
+		DELETE FROM MBPROJECT_BOARD WHERE BNUMBER=#{bnumber}
+	</delete>
+
+	<select id="boardSearch" resultType="board">
+		SELECT * FROM MBPROJECT_BOARD
+		<include refid="search"></include>
+
+	</select>
+
+	<sql id="search">
+		<choose>
+			<when test="type=='searchtitle'">
+				WHERE BTITLE LIKE '%'||#{word}||'%'
+			</when>
+			<when test="type=='searchwriter'">
+				WHERE BID LIKE '%'||#{word}||'%'
+			</when>
+		</choose>
+	</sql>
+	
+	
+</mapper>
