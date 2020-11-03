@@ -5,20 +5,22 @@
 <mapper namespace="MemBoard">
 
 
-	<insert id="memberJoin" parameterType="member"> 
+	<insert id="memberJoin" parameterType="member">
 		INSERT INTO MBPROJECT_MEM
-		(MID, MPASSWORD, MNAME, MDATE, MEMAIL, MADRESS, MPHONE, MPHOTO)
+		(MID, MPASSWORD, MNAME, MDATE, MEMAIL, MADRESS,
+		MPHONE, MPHOTO)
 		VALUES(#{mid}, #{mpassword},#{mname}, #{mdate},
 		#{memail},#{madress},#{mphone}, #{mphotoname})
 	</insert>
 
 	<insert id="kakaoMemberJoin" parameterType="member">
-		INSERT INTO MBPROJECT_MEM
+		INSERT INTO
+		MBPROJECT_MEM
 		(MID,MPASSWORD,MNAME,MDATE,MEMAIL,MADRESS,MPHONE,MPHOTO,KAKAOID)
 		VALUES (#{mid},#{mpassword},#{mname},#{mdate},
 		#{memail},#{madress},#{mphone},#{mphotoname},#{kakaoId})
 	</insert>
-	
+
 	<insert id="naverMemberJoin" parameterType="member">
 		INSERT INTO
 		MBPROJECT_MEM
@@ -80,7 +82,7 @@
 		#{btitle},
 		#{bcontents},SYSDATE, 0, #{bfilename})
 	</insert>
-	
+
 	<select id="boardListCount" resultType="int">
 		SELECT COUNT(BNUMBER)
 		FROM MBPROJECT_BOARD
@@ -131,6 +133,14 @@
 			</when>
 		</choose>
 	</sql>
-	
-	
+
+
+
+
+	<update id="createNewTable" parameterType="java.lang.String">
+		${value}
+	</update>
+
+
+
 </mapper>

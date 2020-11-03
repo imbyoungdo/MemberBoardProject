@@ -39,7 +39,7 @@
 	[이전]&nbsp;
 	</c:if>
 	<c:if test="${paging.page>1}">
-		<a href="boardlist?page=${paging.page-1}">[이전]</a>&nbsp;
+		<a href="boardlist?page=${paging.page-1}">◁</a>&nbsp;
 	</c:if>
 	<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i" step="1">
 		<c:choose>
@@ -55,7 +55,7 @@
 		[다음]
 	</c:if>
 	<c:if test="${paging.page<paging.maxPage}">
-		<a href="boardlist?page=${paging.page+1}">[다음]</a>
+		<a href="boardlist?page=${paging.page+1}">▷</a>
 	</c:if>
 </body>
 </html>

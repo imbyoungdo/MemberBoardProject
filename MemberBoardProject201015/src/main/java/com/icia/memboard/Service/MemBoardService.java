@@ -39,7 +39,7 @@ public class MemBoardService {
 	private static final int PAGE_LIMIT = 3;
 	private static final int BLOCK_LIMIT = 5;
 
-	//회원가입
+	// 회원가입
 	public ModelAndView memberSign(MemberDTO member) throws IllegalStateException, IOException {
 
 		mav = new ModelAndView();
@@ -64,8 +64,8 @@ public class MemBoardService {
 		}
 		return mav;
 	}
-	
-	//아이디 중복확인(ajax)
+
+	// 아이디 중복확인(ajax)
 	public String idOverlap(String mid) {
 		String checkResult = mbDAO.idOverlap(mid);
 		String resultMsg = null;
@@ -78,7 +78,7 @@ public class MemBoardService {
 		return resultMsg;
 	}
 
-	//로그인
+	// 로그인
 	public ModelAndView memberLogin(MemberDTO member) {
 		mav = new ModelAndView();
 
@@ -94,7 +94,7 @@ public class MemBoardService {
 		return mav;
 	}
 
-	//회원 정보 조회
+	// 회원 정보 조회
 	public ModelAndView memberView(String mid) {
 		mav = new ModelAndView();
 		MemberDTO memberView = mbDAO.memberView(mid);
@@ -102,8 +102,8 @@ public class MemBoardService {
 		mav.setViewName("membov/MemberView");
 		return mav;
 	}
-	
-	//회원 정보 수정 - 1
+
+	// 회원 정보 수정 - 1
 	public ModelAndView membeUpdate(String mid) {
 
 		mav = new ModelAndView();
@@ -112,8 +112,8 @@ public class MemBoardService {
 		mav.setViewName("membov/memberUpdate");
 		return mav;
 	}
-	
-	//회원 정보수정 - 2
+
+	// 회원 정보수정 - 2
 	public ModelAndView memberupdateProcess(MemberDTO member) {
 		mav = new ModelAndView();
 		int updateResult = mbDAO.memberUpdateProcess(member);
@@ -126,7 +126,7 @@ public class MemBoardService {
 		return mav;
 	}
 
-	//회원 목록
+	// 회원 목록
 	public ModelAndView memberList() {
 		mav = new ModelAndView();
 		List<MemberDTO> memberList = mbDAO.memberList();
@@ -137,7 +137,7 @@ public class MemBoardService {
 		return mav;
 	}
 
-	//회원 삭제
+	// 회원 삭제
 	public ModelAndView memberDelete(String mid) {
 
 		mav = new ModelAndView();
@@ -152,7 +152,7 @@ public class MemBoardService {
 		return mav;
 	}
 
-	//카카오 로그인
+	// 카카오 로그인
 	public ModelAndView kakaoLogin(JsonNode profile) {
 		mav = new ModelAndView();
 
@@ -163,7 +163,7 @@ public class MemBoardService {
 		return mav;
 	}
 
-	//네이버 로그인
+	// 네이버 로그인
 	public ModelAndView naverLogin(String profile) throws ParseException {
 		mav = new ModelAndView();
 
@@ -183,7 +183,7 @@ public class MemBoardService {
 		return mav;
 	}
 
-	//게시글 작성
+	// 게시글 작성
 	public ModelAndView boardWrite(BoardDTO board) throws IllegalStateException, IOException {
 		mav = new ModelAndView();
 
@@ -205,7 +205,7 @@ public class MemBoardService {
 		return mav;
 	}
 
-	//글 목록
+	// 글 목록
 	public ModelAndView boardList(int page) {
 		mav = new ModelAndView();
 
@@ -237,7 +237,7 @@ public class MemBoardService {
 		return mav;
 	}
 
-	//글 조회
+	// 글 조회
 	public ModelAndView boardView(int bnumber, int page) {
 		mav = new ModelAndView();
 
@@ -253,7 +253,7 @@ public class MemBoardService {
 		return mav;
 	}
 
-	//글 수정 - 1
+	// 글 수정 - 1
 	public ModelAndView boardUpdate(int bnumber) {
 		mav = new ModelAndView();
 
@@ -264,7 +264,7 @@ public class MemBoardService {
 		return mav;
 	}
 
-	//글 수정 - 2
+	// 글 수정 - 2
 	public ModelAndView boardUpdateprocess(BoardDTO board) {
 		mav = new ModelAndView();
 
@@ -279,7 +279,7 @@ public class MemBoardService {
 		return mav;
 	}
 
-	//글 삭제
+	// 글 삭제
 	public ModelAndView boardDelete(int bnumber) {
 		mav = new ModelAndView();
 		int deleteReault = mbDAO.boardDelete(bnumber);
@@ -294,7 +294,7 @@ public class MemBoardService {
 		return mav;
 	}
 
-	//검색
+	// 검색
 	public ModelAndView boardSearch(String searchtype, String keyword) {
 		mav = new ModelAndView();
 
@@ -302,6 +302,12 @@ public class MemBoardService {
 		mav.addObject("boardList", searchlist);
 		mav.setViewName("membov/MemBoardMain");
 
+		return mav;
+	}
+
+	public ModelAndView boardPlus(int bnmber) {
+		mav = new ModelAndView();
+		mbDAO.boardPlus(bnmber);
 		return mav;
 	}
 

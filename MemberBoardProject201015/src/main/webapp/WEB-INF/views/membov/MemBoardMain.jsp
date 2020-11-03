@@ -54,11 +54,11 @@ function boardSearch() {
 	
 	<!-- 페이징 처리 -->
 	<c:if test="${paging.page<=1}">
-	[이전]&nbsp;
+	◁&nbsp;
 	</c:if>
 	
 	<c:if test="${paging.page>1}">
-		<a href="boardlist?page=${paging.page-1}">[이전]</a>&nbsp;
+		<a href="boardlist?page=${paging.page-1}">◁</a>&nbsp;
 	</c:if>
 	
 	<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i" step="1">
@@ -73,11 +73,11 @@ function boardSearch() {
 	</c:forEach>
 
 	<c:if test="${paging.page>=paging.maxPage}">
-		[다음]
+		▷
 	</c:if>
 	
 	<c:if test="${paging.page<paging.maxPage}">
-		<a href="boardlist?page=${paging.page+1}">[다음]</a>
+		<a href="boardlist?page=${paging.page+1}">▷</a>
 	</c:if>
 	<br>
 <form action="boardsearch" method="get" name="searchform">
@@ -88,5 +88,15 @@ function boardSearch() {
 		<input type="text" name="keyword" placeholder="검색어입력">
 		<input type="button" onclick="boardSearch()" value="검색">
 	</form>
+	
+	
+	<br>
+	<br>
+	
+	
+	
+	
+	
+	<a href="boardplus">테이블 추가하기</a>
 </body>
 </html>

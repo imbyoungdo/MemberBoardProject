@@ -74,7 +74,6 @@ public class MemBoardController {
 	}
 
 	// 아이디 중복확인
-
 	@RequestMapping(value = "/idoverlap")
 	public @ResponseBody String idOverlap(@RequestParam("mid") String mid) {
 		System.out.println("전달받은 값 : " + mid);
@@ -291,12 +290,19 @@ public class MemBoardController {
 		mav = memboardService.boardDelete(bnumber);
 		return mav;
 	}
-	// 검색
-		@RequestMapping(value = "/boardsearch")
-		public ModelAndView boardSearch(@RequestParam("searchtype") String searchtype,
-				@RequestParam("keyword") String keyword) {
-			mav = memboardService.boardSearch(searchtype, keyword);
-			return mav;
-		}
 
+	// 검색
+	@RequestMapping(value = "/boardsearch")
+	public ModelAndView boardSearch(@RequestParam("searchtype") String searchtype,
+			@RequestParam("keyword") String keyword) {
+		mav = memboardService.boardSearch(searchtype, keyword);
+		return mav;
+	}
+
+	// 데이터 추가하기
+	@RequestMapping(value = "/boardplus")
+	public ModelAndView boardplus(@RequestParam("bnumber") int bnumber) {
+		mav = memboardService.boardPlus(bnumber);
+		return mav;
+	}
 }
