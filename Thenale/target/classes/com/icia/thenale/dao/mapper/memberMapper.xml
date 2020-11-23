@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Member">
+	<!-- 회원가입 -->
+	<insert id="memberJoin" parameterType="member">
+		insert into tb_member(m_num, m_id, m_password, m_name, m_email, m_phone, m_profile, m_auth, m_permit)
+		values(member_seq.nextval, #{m_id}, #{m_password}, #{m_name}, #{m_email}, #{m_phone}, #{m_profile}, 'C', 0)
+	</insert>
+	
+	<!-- 로그인 -->
+	<select id="memberLogin" parameterType="member" resultType="String">
+		select m_id from tb_member where m_id = #{m_id} and m_password = #{m_password}
+	</select>
+	
+	<!-- 내 정보 mypage -->
+	<select id="memberView" parameterType="String" resultType="member">
+		select * from tb_member where m_id = #{m_id}
+	</select>
+	
+	<update id="memberUpdate" parameterType="member">
+		update tb_member set m_id = #{m_id}, m_password = #{m_password}, m_name = #{m_name}, m_email = #{m_email}, m_phone = #{m_phone}, m_profile = #{m_profile} where m_id = #{m_id}
+	</update>
+	
+</mapper>
+ 

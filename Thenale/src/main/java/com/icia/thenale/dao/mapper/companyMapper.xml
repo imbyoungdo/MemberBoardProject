@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Company">
+
+	<insert id="companyJoin" parameterType="company">
+		insert into
+		tb_company(c_id, c_password, c_name, c_photo, c_contents, c_address,
+		c_y, c_x, c_sort, c_ceo_tel, c_ceo, c_area, c_auth)
+		values (#{c_id},
+		#{c_password}, #{c_name}, #{c_photo}, #{c_contents}, #{c_address},
+		#{c_y}, #{c_x}, #{c_sort}, #{c_ceo_tel}, #{c_ceo}, #{c_area}, 'c')
+	</insert>
+
+	<select id="companyLogin" parameterType="company"
+		resultType="String">
+		select c_id from tb_company where c_id = #{c_id} and
+		c_password = #{c_password}
+	</select>
+
+	<select id="companyList" resultType="company">
+		select * from tb_company
+	</select>
+
+	<select id="companyView" parameterType="String"
+		resultType="company">
+		select * from tb_company where c_id = #{c_id}
+	</select>
+
+	<update id="companyAdmission" parameterType="company">
+		update tb_company
+		set c_auth = 'b' where c_id = #{c_id}
+	</update>
+
+
+	<select id="hotelList" resultType="hotel" parameterType="String">
+
+		select *
+		from tb_hotel where h_area = #{h_area}
+
+	</select>
+	<delete id="companyDelete" parameterType="String">
+
+		delete from tb_company where c_id=#{c_id}
+
+	</delete>
+
+</mapper>

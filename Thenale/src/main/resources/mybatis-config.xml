@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<!-- <typeAlias alias="board" type="com.icia.thenale.dto.BoardDTO"/> -->
+		<typeAlias alias="company" type="com.icia.thenale.dto.CompanyDTO"/>
+		<typeAlias alias="member" type="com.icia.thenale.dto.MemberDTO"/>
+		<typeAlias alias="spot" type="com.icia.thenale.dto.SpotDTO"/>
+		<typeAlias alias="food" type="com.icia.thenale.dto.FoodDTO"/>
+		<typeAlias alias="hotel" type="com.icia.thenale.dto.HotelDTO"/>
+		<!-- <typeAlias alias="page" type="com.icia.thenale.dto.PageDTO"/> -->
+	</typeAliases>
+</configuration>

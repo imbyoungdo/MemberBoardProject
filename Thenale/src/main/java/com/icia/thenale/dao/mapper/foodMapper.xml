@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Food">
+
+	<insert id="foodAdd" parameterType="company">
+
+		INSERT INTO TB_food(f_num, f_c_id, f_name, f_contents, f_photo, f_x, f_y, f_area, f_address)
+		values(food_seq.NEXTVAL, #{c_id}, #{c_name}, #{c_contents}, #{c_photo}, #{c_x}, #{c_y}, #{c_area}, #{c_address})
+
+	</insert>
+
+	<select id="foodList" parameterType="String" resultType="food">
+
+		select * from tb_food where f_area = #{f_area}
+
+	</select>
+
+</mapper>
+ 

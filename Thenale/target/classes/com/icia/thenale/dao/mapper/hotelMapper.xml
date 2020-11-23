@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Hotel">
+
+	<insert id="hotelAdd" parameterType="company">
+
+		INSERT INTO TB_HOTEL(h_num, h_c_id, h_name, h_contents, h_photo, h_x, h_y, h_area, h_address)
+		values(hotel_seq.NEXTVAL, #{c_id}, #{c_name}, #{c_contents}, #{c_photo}, #{c_x}, #{c_y}, #{c_area}, #{c_address})
+	
+	</insert>
+
+	<select id="hotelList" parameterType="String" resultType="hotel">
+
+		select * from tb_hotel where h_area = #{h_area}
+
+	</select>
+
+</mapper>
+ 
